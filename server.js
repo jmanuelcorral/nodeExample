@@ -13,13 +13,12 @@ function init(route, handle, errors)
 {
 	function onRequest(request, response) {
 		request.setEncoding("utf8");
-
 		var pathname = url.parse(request.url).pathname;
-
+		console.log("Request method: ", request.method);
 		var form_data = "";
-		request.on("data", function (data) {
-			console.log("Getting chunk data: " + data);
-			form_data += data;
+		request.on("data", function (chunk) {
+			console.log("Getting chunk data: " + chunk);
+			form_data += chunk;
 		});
 
 		request.on("end", function () {

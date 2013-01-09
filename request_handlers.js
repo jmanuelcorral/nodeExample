@@ -1,7 +1,7 @@
 var querystring = require("querystring");
 
 function index(response, formdata) {
-	console.log("Handler iniciar");
+	console.log("Handler Index");
  	var body = '<html>'+
     '<head>'+
     '<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />'+
@@ -19,7 +19,7 @@ function index(response, formdata) {
 }
 
 function upload(response, formdata) {
-	console.log("Handler subir");
+	console.log("Handler Upload");
 	response.writeHead(200, {"Content-Type": "text/html"});
 	response.write("Tu enviaste el texto: " + querystring.parse(formdata)["text"]);
 	response.end();
