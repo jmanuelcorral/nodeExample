@@ -3,8 +3,11 @@ var router = require("./router");
 var requestHandlers = require("./request_handlers");
 
 var handle = {}
-handle["/"] = requestHandlers.iniciar;
-handle["/iniciar"] = requestHandlers.iniciar;
-handle["/subir"] = requestHandlers.subir;
+handle["/"] = requestHandlers.index;
+handle["/index"] = requestHandlers.index;
+handle["/upload"] = requestHandlers.upload;
 
-server.init(router.route, handle);
+var errors = {}
+errors["404"] = requestHandlers.route_error;
+
+server.init(router.route, handle, errors);

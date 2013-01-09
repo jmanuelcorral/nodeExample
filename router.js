@@ -1,10 +1,9 @@
-function route(handle, pathname) {
-  console.log("A punto de rutear una peticion para " + pathname);
+function route(handle, pathname, response, formdata, errors) {
+  console.log("Routing: " + pathname);
   if (typeof handle[pathname] === 'function') {
-    return handle[pathname]();
+    handle[pathname](response, formdata);
   } else {
-    console.log("No se encontro handler para " + pathname);
-    return "404 No Encontrado";
+  	errors["404"](pathname, response);
   }
 }
 

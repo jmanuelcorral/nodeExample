@@ -1,10 +1,38 @@
-function iniciar() {
-  console.log("Manipulador de petición 'iniciar' ha sido llamado.");
+var querystring = require("querystring");
+
+function index(response, formdata) {
+	console.log("Handler iniciar");
+ 	var body = '<html>'+
+    '<head>'+
+    '<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />'+
+    '</head>'+
+    '<body>'+
+    '<form action="/upload" method="post">'+
+    '<textarea id="text" rows="20" cols="60"></textarea>'+
+    '<input type="submit" value="Submit text" />'+
+    '</form>'+
+    '</body>'+
+    '</html>';
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write(body);
+    response.end();
 }
 
-function subir() {
-  console.log("Manipulador de petición 'subir' ha sido llamado.");
+function upload(response, formdata) {
+	console.log("Handler subir");
+	response.writeHead(200, {"Content-Type": "text/html"});
+	response.write("Tu enviaste el texto: " + querystring.parse(formdata)["text"]);
+	response.end();
 }
 
-exports.iniciar = iniciar;
-exports.subir = subir;
+function route_error(pathname, response)
+{
+    console.log("Error, handler " + pathname + " not found");
+   	response.writeHead(404, {"Content-Type": "text/html"});
+    response.write("404 No encontrado");
+    response.end();
+}
+
+exports.index = index;
+exports.upload = upload;
+exports.route_error = route_error;
